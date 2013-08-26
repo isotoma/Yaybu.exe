@@ -87,6 +87,15 @@ Then install pip and get the requirements::
     C:\Python27\python -m easy_install pip
     C:\Python27\python -m pip install -r requirements.txt
 
+This doesn't actually install any yay/yaybu code (for which you have a few choices)::
+
+    C:\Python27\python -m pip install git+git://github.com/isotoma/yay.git#egg=yay
+    C:\Python27\python -m pip install git+git://github.com/isotoma/yaybu.git#egg=yaybu
+
+or (if you check out the code by hand or with buildbot)::
+
+    C:\Python27\python -m pip install -e src/yay
+    C:\Python27\python -m pip install -e src/yaybu
 
 Building an exe
 ===============
