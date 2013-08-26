@@ -1,0 +1,17 @@
+# Find links
+--find-links https://gevent.googlecode.com/files/gevent-1.0rc2.tar.gz
+
+# Dependencies for build
+py2exe==0.6.9
+
+# Dependencies for runtime
+Jinja2==2.7.1
+MarkupSafe==0.18
+apache-libcloud==0.13.0
+gevent==1.0rc2
+greenlet==0.4.1
+lockfile==0.9.1
+paramiko==1.11.0
+ply==3.4
+pycrypto==2.6
+python-dateutil==1.5
