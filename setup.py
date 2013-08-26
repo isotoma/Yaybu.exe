@@ -14,13 +14,18 @@ class BuildExe(py2exe.build_exe.py2exe):
         eggs = pkg_resources.require("Yaybu")
         for egg in eggs:
             print '%s == %s' % (egg.project_name, egg.version)
-            # path = os.path.join(self.collect_dir, '%s.egg-info' % egg.project_name)
             path = os.path.join(self.exe_dir, '%s.egg-info' % egg.project_name)
             with open(path, "w") as fp:
                 fp.write("Metadata-Version: 1.0\n")
                 fp.write("Name: %s\n" % egg.project_name)
                 fp.write("Version: %s\n" % egg.version)
-            # self.compiled_files.append(os.path.basename(path))
+
+        print "*** bundling cacert.pem ***"
+        self.copy_file(
+            os.path.join(os.getcwd(), "cacert.pem"),
+            os.path.join(self.exe_dir, "cacert.pem"),
+            )
+
 
 setup(
     console=['YaybuShell.py'],
