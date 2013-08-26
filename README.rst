@@ -52,6 +52,8 @@ You can check the exported symbols with nm (look for ``I`` for import symbol)::
 
     nm libpython27.a
 
+Out of the box python2.7 will not be able to use this version of mingw32. Edit ``C:\Python27\Lib\distutils\cygwinccompiler.py`` and remove all mentions of ``-mno-cygwin``.
+
 Python needs to be told to use mingw32. You can do this with a ``C:\Python27\Lib\distutils\distutils.cfg``::
 
     [build]
