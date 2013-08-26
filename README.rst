@@ -4,24 +4,16 @@ Yaybu on Windows
 
 This process has been observed to work on 32-bit Windows XP.
 
-Getting this repository
-=======================
+Let's set up a nice ``PATH``::
 
-We originally tested with GitHub's GUI, which comes with some POSIXy tools in a directory like this::
+    set PATH=C:\Git\bin;C:\Python27;C:\MinGW\bin;%PATH%
 
-    C:\Documents and Settings\SomeUser\Local Settings\Application Data\GitHub\PortableGit_015aa71ef18c047ce8509ffb2f9e4bb0e3e73f13\bin
+Install msysgit (the official windows port of Git):
 
-Putting this on PATH allows pip to work with git:// based eggs.
-
-An alternative is the proper Git installer https://msysgit.googlecode.com/files/Git-1.8.3-preview20130601.exe
-
-Once you have working git you can just::
-
-    git clone git://github.com/isotoma/Yaybu.exe C:\Yaybu.exe
-
-
-Set up your build environment
-=============================
+ * URL is https://msysgit.googlecode.com/files/Git-1.8.3-preview20130601.exe
+ * Install to C:\Git
+ * Default line ending mode (converts to windows on checkout / to unix on commit)
+ * Don't bother with any shell integration, but the font is nice.
 
 Install python2.7, py2exe, pycrypto from installers:
 
@@ -29,13 +21,17 @@ Install python2.7, py2exe, pycrypto from installers:
  * http://downloads.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.win32-py2.7.exe
  * http://www.voidspace.org.uk/downloads/pycrypto26/pycrypto-2.6.win32-py2.7.exe
 
-Install mingw32 using the installer (http://sourceforge.net/projects/mingw/files/Automated%20MinGW%20Installer/mingw-get/)::
+Install MinGW Installation Manager Setup Tool:
 
-    mingw-get install gcc
-    mingw-get install mingw-utils
+ * http://sourceforge.net/projects/mingw/files/Installer/mingw-get-setup.exe/download
+
+There is no need to let it do GUI stuff. You can then install gcc and tools::
+
+    mingw-get install gcc ming-utils
 
 At the time of writing this seems to yield a broken environment - so copy some DDL's around. To fix cc1plus::
 
+    cd C:\MinGW
     copy bin\libgmp-10.dll libexec\gcc\mingw32\4.7.2\
     copy bin\libmpc-2.dll libexec\gcc\mingw32\4.7.2\
     copy bin\libmpfr-1.dll libexec\gcc\mingw32\4.7.2\
@@ -72,36 +68,41 @@ The default site.py has an abs_file that seems to break when using py2exe. Patch
     +        except (AttributeError, OSError, ImportError):
                  pass
 
+You are now ready to get the code::
+
+    git clone https://github.com/isotoma/Yaybu.exe C:\Yaybu.exe
+    cd C:\Yaybu.exe
+
 Install setuptools using the ez_setup.py script provided::
 
-    C:\Python27\python ez_setup.py
+    python ez_setup.py
 
 py2exe will break with setuptools because it is compressed. A better way to deal with it is needed, but for now::
 
-    C:\Python27\python -m easy_install --always-unzip --upgrade "setuptools<1.0"
+    python -m easy_install --always-unzip --upgrade "setuptools<1.0"
 
 (You can upgrade to the active version because it detects it is already the latest version).
 
 Then install pip and get the requirements::
 
-    C:\Python27\python -m easy_install pip
-    C:\Python27\python -m pip install -r requirements.txt
+    python -m easy_install pip
+    python -m pip install -r requirements.txt
 
 This doesn't actually install any yay/yaybu code (for which you have a few choices)::
 
-    C:\Python27\python -m pip install git+git://github.com/isotoma/yay.git#egg=yay
-    C:\Python27\python -m pip install git+git://github.com/isotoma/yaybu.git#egg=yaybu
+    python -m pip install git+git://github.com/isotoma/yay.git#egg=yay
+    python -m pip install git+git://github.com/isotoma/yaybu.git#egg=yaybu
 
 or (if you check out the code by hand or with buildbot)::
 
-    C:\Python27\python -m pip install -e src/yay
-    C:\Python27\python -m pip install -e src/yaybu
+    python -m pip install -e src/yay
+    python -m pip install -e src/yaybu
 
 Building an exe
 ===============
 
 Run ``py2exe``::
 
-    C:\Python27\python setup.py py2exe
+    python setup.py py2exe
 
 This will create a directory with python extensions, a library.zip and a ``YaybuShell.exe``. This binary is equivalent to the ``yaybu`` command on a unix system.
