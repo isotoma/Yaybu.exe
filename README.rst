@@ -98,6 +98,16 @@ or (if you check out the code by hand or with buildbot)::
     python -m pip install -e src/yay
     python -m pip install -e src/yaybu
 
+
+Running tests
+=============
+
+There are extra deps for the tests::
+
+    python -m pip install nose2 unittest2 mock fakechroot
+    python -m nose2 yay yaybu
+    
+
 Building an exe
 ===============
 
