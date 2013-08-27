@@ -2,7 +2,7 @@
 Yaybu on Windows
 ================
 
-This process has been observed to work on 32-bit Windows XP.
+This process has been observed to work on 32-bit Windows XP and Windows 7.
 
 Let's set up a nice ``PATH``::
 
@@ -27,7 +27,7 @@ Install MinGW Installation Manager Setup Tool:
 
 There is no need to let it do GUI stuff. You can then install gcc and tools::
 
-    mingw-get install gcc ming-utils
+    mingw-get install gcc mingw-utils
 
 At the time of writing this seems to yield a broken environment - so copy some DDL's around. To fix cc1plus::
 
