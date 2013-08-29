@@ -70,7 +70,7 @@ The default site.py has an abs_file that seems to break when using py2exe. Patch
 
 You are now ready to get the code::
 
-    git clone https://github.com/isotoma/Yaybu.exe C:\Yaybu.exe
+    git clone https://github.com/yaybu/Yaybu.exe C:\Yaybu.exe
     cd C:\Yaybu.exe
 
 Install setuptools using the ez_setup.py script provided::
@@ -90,8 +90,8 @@ Then install pip and get the requirements::
 
 This doesn't actually install any yay/yaybu code (for which you have a few choices)::
 
-    python -m pip install git+git://github.com/isotoma/yay.git#egg=yay
-    python -m pip install git+git://github.com/isotoma/yaybu.git#egg=yaybu
+    python -m pip install git+git://github.com/yaybu/yay.git#egg=yay
+    python -m pip install git+git://github.com/yaybu/yaybu.git#egg=yaybu
 
 or (if you check out the code by hand or with buildbot)::
 
