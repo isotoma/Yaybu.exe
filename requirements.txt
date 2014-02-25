@@ -1,12 +1,5 @@
-# Requirements are split between here and requirements/yaybu.exe.txt
-# This allows our release infrastructure to build wheels for all the components
-# we aren't injecting from a VCS.
-
-# I.e. we do
-#    pip wheel -r requirements/yaybu.exe.txt
-#    pip install -r requirements.txt
-
 -r requirements/yaybu.exe.txt
 
 ./src/yay
 ./src/yaybu
+
