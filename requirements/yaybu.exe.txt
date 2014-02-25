@@ -2,4 +2,4 @@
 py2exe==0.6.9
 
 # Core dependencies
--r src/yaybu/requirements/yaybu.txt
+-r ../src/yaybu/requirements/yaybu.txt
