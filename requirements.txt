@@ -1,9 +1,12 @@
-# Dependencies for build
-py2exe==0.6.9
+# Requirements are split between here and requirements/yaybu.exe.txt
+# This allows our release infrastructure to build wheels for all the components
+# we aren't injecting from a VCS.
 
-# Core dependencies
--r src/yaybu/requirements/yaybu.txt
+# I.e. we do
+#    pip wheel -r requirements/yaybu.exe.txt
+#    pip install -r requirements.txt
 
-# Test the versions of yay/yaybu we have checked out
+-r requirements/yaybu.exe.txt
+
 ./src/yay
 ./src/yaybu
