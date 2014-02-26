@@ -6,6 +6,25 @@ import pkg_resources
 import ctypes.util
 
 
+# Patch py2exe.build_exe.LOADER so that it doesn't choke on gevent.os etc
+py2exe.build_exe.LOADER = """
+def __load():
+    imp = __import__("imp")
+    os = __import__("os")
+    sys = __import__("sys")
+    try:
+        dirname = os.path.dirname(__loader__.archive)
+    except NameError:
+        dirname = sys.prefix
+    path = os.path.join(dirname, '%s')
+    #print "py2exe extension module", __name__, "->", path
+    mod = imp.load_dynamic(__name__, path)
+    mod.frozen = 1
+__load()
+del __load
+"""
+
+
 class BuildExe(py2exe.build_exe.py2exe):
 
     def create_binaries(self, py_files, extensions, dlls):
