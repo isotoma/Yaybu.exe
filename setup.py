@@ -34,6 +34,7 @@ setup(
     },
     options = {
         "py2exe": {
+            "bundle_files": 1,
             "includes": [
                 'pkg_resources',
                 #'email.image',
