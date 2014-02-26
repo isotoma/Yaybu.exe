@@ -3,6 +3,8 @@ from setuptools import setup
 import py2exe
 import py2exe.build_exe
 import pkg_resources
+import ctypes.util
+
 
 class BuildExe(py2exe.build_exe.py2exe):
 
@@ -26,6 +28,12 @@ class BuildExe(py2exe.build_exe.py2exe):
             os.path.join(self.exe_dir, "cacert.pem"),
             )
 
+        print "*** bundling python dll ***"
+        self.copy_file(
+            ctypes.util.find_library('python27.dll'),
+            os.path.join(self.exe_dir, 'python27.dll'),
+            )
+
 
 setup(
     console=['YaybuShell.py'],
@@ -34,7 +42,6 @@ setup(
     },
     options = {
         "py2exe": {
-            "bundle_files": 1,
             "includes": [
                 'pkg_resources',
                 #'email.image',
