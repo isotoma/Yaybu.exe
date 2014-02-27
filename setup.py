@@ -27,6 +27,27 @@ del __load
 
 class BuildExe(py2exe.build_exe.py2exe):
 
+    def _copy_assets(self, package, globs):
+        src = os.path.join(os.path.dirname(importlib.import_module(package).__file__))
+        dst = os.path.join(self.collect_dir, *package.split("."))
+
+        for g in globs:
+            for f in glob.glob(os.path.join(src, g)):
+                name = os.path.relpath(f, src)
+                directory = os.path.dirname(f)
+
+                if not os.path.exists(dst):
+                    self.mkpath(dst)
+
+                self.copy_file(g, os.path.join(dst, name))
+                self.compiled_files.append(os.path.join(dst, name))
+
+    def copy_extensions(self, extensions):
+        py2exe.build_exe.py2exe.copy_extensions(self, extensions)
+
+        print "*** injecting non-code assets into library.zip ***"
+        self._copy_assets("yaybu.tests", ["*.json"])        
+
     def create_binaries(self, py_files, extensions, dlls):
         py2exe.build_exe.py2exe.create_binaries(self, py_files, extensions, dlls)
 
