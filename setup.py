@@ -51,6 +51,7 @@ class BuildExe(py2exe.build_exe.py2exe):
 
         print "*** injecting non-code assets into library.zip ***"
         self._copy_assets("yaybu.tests", ["*.json"])
+        print "FINISHED"
 
     def create_binaries(self, py_files, extensions, dlls):
         py2exe.build_exe.py2exe.create_binaries(self, py_files, extensions, dlls)
