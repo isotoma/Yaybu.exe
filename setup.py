@@ -88,6 +88,7 @@ setup(
         "py2exe": {
             "includes": [
                 'pkg_resources',
+                'yaybu.tests',
                 #'email.image',
                 ],
             },
