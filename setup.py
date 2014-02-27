@@ -88,7 +88,6 @@ setup(
     },
     options = {
         "py2exe": {
-            "packages": ['yaybu', 'yaybu.tests'],
             "includes": [
                 'pkg_resources',
                 #'email.image',
