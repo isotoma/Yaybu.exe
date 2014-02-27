@@ -83,12 +83,12 @@ setup(
     console=[
         dict(script='YaybuShell.py', dest_base='yaybu'),
     ],
-    packages=['yaybu', 'yaybu.tests'],
     cmdclass = {
             'py2exe': BuildExe,
     },
     options = {
         "py2exe": {
+            "packages": ['yaybu', 'yaybu.tests'],
             "includes": [
                 'pkg_resources',
                 #'email.image',
