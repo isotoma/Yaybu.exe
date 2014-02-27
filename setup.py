@@ -37,10 +37,10 @@ class BuildExe(py2exe.build_exe.py2exe):
             for f in glob.glob(os.path.join(src, g)):
                 name = os.path.relpath(f, src)
                 destination = os.path.join(dst, name)
-                destination_dir = os.path.dirname(destionation)
+                destination_dir = os.path.dirname(destination)
 
-                if not os.path.exists(destionation_dir):
-                    self.mkpath(destionation_dir)
+                if not os.path.exists(destination_dir):
+                    self.mkpath(destination_dir)
 
                 self.copy_file(f, destination)
                 self.compiled_files.append(destination)
