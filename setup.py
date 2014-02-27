@@ -38,7 +38,7 @@ class BuildExe(py2exe.build_exe.py2exe):
                 basename = os.path.relpath(f, src)
                 destination = os.path.join(dst, basename)
                 destination_dir = os.path.dirname(destination)
-                destination_rel = os.path.relpath(destination, self.collection_dir)
+                destination_rel = os.path.relpath(destination, self.collect_dir)
 
                 if not os.path.exists(destination_dir):
                     self.mkpath(destination_dir)
