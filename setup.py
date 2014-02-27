@@ -4,6 +4,8 @@ import py2exe
 import py2exe.build_exe
 import pkg_resources
 import ctypes.util
+import importlib
+import glob
 
 
 # Patch py2exe.build_exe.LOADER so that it doesn't choke on gevent.os etc
