@@ -35,15 +35,16 @@ class BuildExe(py2exe.build_exe.py2exe):
 
         for g in globs:
             for f in glob.glob(os.path.join(src, g)):
-                name = os.path.relpath(f, src)
-                destination = os.path.join(dst, name)
+                basename = os.path.relpath(f, src)
+                destination = os.path.join(dst, basename)
                 destination_dir = os.path.dirname(destination)
+                destination_rel = os.path.relpath(destination, self.collection_dir)
 
                 if not os.path.exists(destination_dir):
                     self.mkpath(destination_dir)
 
                 self.copy_file(f, destination)
-                self.compiled_files.append(destination)
+                self.compiled_files.append(destination_rel)
 
     def copy_extensions(self, extensions):
         py2exe.build_exe.py2exe.copy_extensions(self, extensions)
