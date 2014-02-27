@@ -81,6 +81,7 @@ class BuildExe(py2exe.build_exe.py2exe):
 
 setup(
     console=['YaybuShell.py'],
+    packages=['yaybu', 'yaybu.tests'],
     cmdclass = {
             'py2exe': BuildExe,
     },
@@ -88,7 +89,6 @@ setup(
         "py2exe": {
             "includes": [
                 'pkg_resources',
-                'yaybu.tests',
                 #'email.image',
                 ],
             },
