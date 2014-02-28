@@ -83,7 +83,7 @@ class BuildExe(py2exe.build_exe.py2exe):
 
 setup(
     console=[
-      'YaybuShell.py',
+        dict(script='YaybuShell.py', dest_base='yaybu'),
     ],
     cmdclass = {
             'py2exe': BuildExe,
