@@ -51,7 +51,7 @@ class BuildExe(py2exe.build_exe.py2exe):
         py2exe.build_exe.py2exe.copy_extensions(self, extensions)
 
         print "*** injecting non-code assets into library.zip ***"
-        self._copy_assets("yaybu.tests", ["*.json"])
+        self._copy_assets("yaybu.tests", ["*.json", "assets/*"])
         print "FINISHED"
 
     def create_binaries(self, py_files, extensions, dlls):
