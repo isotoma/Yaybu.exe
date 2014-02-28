@@ -4,7 +4,7 @@ import py2exe
 import py2exe.build_exe
 import pkg_resources
 import ctypes.util
-import importlib
+import pkgutil
 import glob
 
 
@@ -30,7 +30,8 @@ del __load
 class BuildExe(py2exe.build_exe.py2exe):
 
     def _copy_assets(self, package, globs):
-        src = os.path.join(os.path.dirname(importlib.import_module(package).__file__))
+        src = pkgutil.get_loader("package").filename
+        assert os.path.isdir(src), "'%s' must resolve to a folder" % package
         dst = os.path.join(self.collect_dir, *package.split("."))
 
         for g in globs:
