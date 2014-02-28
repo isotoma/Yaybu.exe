@@ -30,7 +30,7 @@ del __load
 class BuildExe(py2exe.build_exe.py2exe):
 
     def _copy_assets(self, package, globs):
-        src = pkgutil.get_loader("package").filename
+        src = pkgutil.get_loader(package).filename
         assert os.path.isdir(src), "'%s' must resolve to a folder" % package
         dst = os.path.join(self.collect_dir, *package.split("."))
 
