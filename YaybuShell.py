@@ -8,7 +8,14 @@ code_dir = os.path.dirname(sys.path[0])
 sys.path.append(code_dir)
 
 
-# Bundle a cacert.pem so HTTPS is secure
+# Requests bundles cacert.pem, but it can't see it inside library.zip
+# The bundler will ship cacert.pem alongside yaybu.exe
+import requests.certs
+requests.certs.where = lambda: os.path.join(code_dir, "cacert.pem")
+
+
+# libcloud depends on a system cert bundle. Point it at the requests
+# cacert.pem...
 import libcloud.security
 libcloud.security.CA_CERTS_PATH.append(
     os.path.join(code_dir, "cacert.pem")

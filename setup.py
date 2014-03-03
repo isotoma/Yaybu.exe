@@ -69,10 +69,12 @@ class BuildExe(py2exe.build_exe.py2exe):
                 fp.write("Version: %s\n" % egg.version)
 
         print "*** bundling cacert.pem ***"
-        self.copy_file(
-            os.path.join(os.getcwd(), "cacert.pem"),
-            os.path.join(self.exe_dir, "cacert.pem"),
-            )
+        certs = pkgutil.get_data("requests", "cacert.pem")
+        if not certs:
+            print "'requests' module doesn't seem to contain cacert.pem?"
+            sys.exit(1)
+        with open(os.path.join(self.exe_dir, "cacert.pem"), "w") as fp:
+            fp.write(certs)
 
         print "*** bundling python dll ***"
         self.copy_file(
